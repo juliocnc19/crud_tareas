@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang=es>
+  <head>
+  <%- include("./header.ejs") %> 
+    <title>Tareas</title>
+  </head>
+  <body>
+  <div class="p-4 d-flex justify-content-center align-items-center flex-column">
+    <form action="/agregar" method="POST">
+      <input type="text" class="form-control" id="tarea" name="tarea" placeholder="Agreagar tarea" autocomplete="off">
+    </form>
+
+    <div class="p-4 d-flex">
+      <ul>
+      <%tareas.forEach(function(tarea){%>
+        <div class="row">
+            <li class="col-5 p-2"><h5><%=tarea.text%></h5></li>
+            <%if(tarea.completed == false){%>
+              <p class="col-4 text-danger p-2">No completada</p>
+            <%}else{%>
+            <p class="col-4 text-success p-2">Completada</p>
+            <%}%>
+              <div class="col-3">
+              <div class="d-flex">
+                <% if(tarea.completed == false){%>
+                 <a href="/complete/<%=tarea._id%>" class="col-auto mb-3 mt-2 btn btn-secondary">completada</a>
+                 <%}%>
+                 <a href="/eliminar/<%=tarea._id%>" class="col-auto mb-3 mt-2 ms-2 btn btn-danger">Eliminar</a>
+              </div>
+              </div>
+           
+        
+        </div>
+          <%})%>
+      </ul>
+     
+
+    </div>
+
+  </div>
+
+  </body>
+</html>
